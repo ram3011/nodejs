@@ -31,8 +31,13 @@ router.use(function (req, res, next) {
 });
 router.get("/", (req, res) => {
   //console.log(morgan("combined"));
-  res.send("hi");
-  
+  connection.query(`SELECT * FROM usersdata`, (err, result) => {
+    if (!err) {
+      res.send(result);
+    } else {
+      res.send(err);
+    }
+  });
 });
 
 router.post("/login", (req, res) => {
@@ -151,21 +156,21 @@ router.use((req, res, next) => {
   if (typeof header !== "undefined") {
     // //console.log("inside");
     const bearer = header.split(" ")[1];
-   // console.log(bearer);
+    // console.log(bearer);
     //console.log(bearer);
     //     // req.token = bearertoken;
     //     //console.log(req.token);
     //     //console.log();verify(bearertoken);
     //   //  const token = jwt.decode(bearer);
     //   //  console.log((token.exp - token.iat)/60 +"min");\
-    jwt.verify(bearer,"secret",(err,result)=>{
-      if(!err){
+    jwt.verify(bearer, "secret", (err, result) => {
+      if (!err) {
         next();
-      }else{
+      } else {
         console.log(err);
         res.sendStatus(403);
       }
-    })
+    });
   } else {
     res.sendStatus(403);
   }
