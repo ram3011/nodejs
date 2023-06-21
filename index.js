@@ -11,6 +11,6 @@ app.use(express.json());
 app.use("/",route);
 dotenv.config();
 //app.use(bodyparser.urlencoded({ extended: false }));
-app.listen(8080,() => {
+app.listen(3011, "0.0.0.0",() => {
   console.log('server started');
 });

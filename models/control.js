@@ -32,6 +32,7 @@ router.use(function (req, res, next) {
 router.get("/", (req, res) => {
   //console.log(morgan("combined"));
   res.send("hi");
+  
 });
 
 router.post("/login", (req, res) => {
